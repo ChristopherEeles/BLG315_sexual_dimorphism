@@ -5,7 +5,7 @@ library(shinydashboardPlus)
 
 # The User Interface
 ui <- dashboardPage(
-    dashboardHeader(
+    header=dashboardHeader(
       title=tagList(
         span(class = 'logo-lg', 'Evolution of Intrasexual Dimorphism'),
         icon('atom')
@@ -13,23 +13,42 @@ ui <- dashboardPage(
       titleWidth=375
     ),
     ## Sidebar content
-    dashboardSidebar(
-      width=375,
+    sidebar=dashboardSidebar(
       sidebarMenu(
+        id='sidebarmenu',
         menuItem("Introduction", tabName = "mod1",
             icon = icon('book-reader')),
         menuItem("Evolution", tabName = "mod2",
             icon = icon('dna')),
         menuItem("Persistence", tabName = "mod3",
             icon= icon('seedling'))
-      )
+      ),
+      width=375
     ),
     ## Body content
-    dashboardBody(
+    body=dashboardBody(
         class="text-center",
         tabItems(
-          tabItem(
-            tabName='mod1',
+          uiOutput('video')
+        )
+    ),
+    footer=dashboardFooter(
+      left='BLG315',
+      right='Lab Section 1'
+    ),
+    skin='green'
+)
+
+# The application logic
+server <- function(input, output) {
+
+    tabUI <- reactiveVal()
+
+    # Render the tab content based on the selected sidebar menu item
+    observeEvent(input$sidebarmenu, {
+      tabUI(switch(req(input$sidebarmenu),
+        'mod1'=tabItem(
+            tabName="mod1",
             fluidRow(
               column(width=12,
                 box(
@@ -75,10 +94,10 @@ ui <- dashboardPage(
                   width=12,
                   title='Lecture 1 Video',
                   tags$iframe(
-                    width='60%',
-                    src="https://www.youtube.com/embed/wloPYg7576I",
-                    scrolling='no',
-                    style='height: 60vh'
+                      width='50%',
+                      src="https://www.youtube.com/embed/wloPYg7576I",
+                      scrolling='no',
+                      style='height: 50vh'
                   )
                 ),
                 box(
@@ -86,9 +105,8 @@ ui <- dashboardPage(
                   collapsible=TRUE,
                   collapsed=TRUE,
                   title='Interactive Quiz 1')
-            ))
-          ),
-          tabItem(
+            ))),
+        'mod2' = tabItem(
             tabName='mod2',
             fluidRow(
               column(width=12,
@@ -135,10 +153,10 @@ ui <- dashboardPage(
                   width=12,
                   title='Lecture 2 Video',
                   tags$iframe(
-                    width='60%',
+                    width='50%',
                     src="https://www.youtube.com/embed/7Ht9jkWXqlU",
                     scrolling='no',
-                    style='height: 60vh'
+                    style='height: 50vh'
                   )
                 ),
                 box(
@@ -146,9 +164,8 @@ ui <- dashboardPage(
                   collapsible=TRUE,
                   collapsed=TRUE,
                   title='Interactive Quiz 2')
-            ))
-          ),
-          tabItem(
+            ))),
+        'mod3' = tabItem(
             tabName='mod3',
             fluidRow(
               column(width=12,
@@ -195,27 +212,23 @@ ui <- dashboardPage(
                   width=12,
                   title='Lecture 3 Video',
                   tags$iframe(
-                    width='60%',
+                    width='50%',
                     src="https://www.youtube.com/embed/EKA5e7Glmh0",
                     scrolling='no',
-                    style='height: 60vh'
-                  )
+                    style='height: 50vh'
+              )
                 ),
                 box(
                   width=12,
                   collapsible=TRUE,
                   collapsed=TRUE,
                   title='Interactive Quiz 3')
-            ))
-          )
-        )
-    ),
-    skin='green'
-)
+            )))
+        ))
+    })
 
-# The application logic
-server <- function(input, output) {
-
+    # Pass the correct tab UI to the front-end
+    output$video <- renderUI({ tabUI() })
 }
 
 # Run the application
