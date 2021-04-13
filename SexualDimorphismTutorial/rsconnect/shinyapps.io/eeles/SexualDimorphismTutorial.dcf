@@ -5,8 +5,8 @@ account: eeles
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3790612
-bundleId: 4463716
+bundleId: 4463842
 url: https://eeles.shinyapps.io/SexualDimorphismTutorial/
-when: 1618282548.56126
+when: 1618285487.55695
 asMultiple: FALSE
 asStatic: FALSE

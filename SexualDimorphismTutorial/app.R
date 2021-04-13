@@ -137,10 +137,32 @@ server <- function(input, output) {
               column(width=12,
                 box(
                   width=12,
-                  title=HTML('<h1>The Evolution of Intrasexaul Dimorphism</h1>'),
+                  title=HTML('<h1>The Evolution of Intrasexual Dimorphism</h1>'),
                   column(width=6, offset=3,
                     tags$div(
                       class='text-justify',
+                      tags$div(
+                        HTML('<h2>Key Concepts</h2>'),
+                        HTML('<p><b>Intrasexual selection</b> occurs when selection
+                            pressure favours two distinct morphologies within a
+                            single sex.</p>'),
+                        HTML('<p>Generally, this selection pressure created by
+                            intense competition for mates between members of a
+                            single sex. In the dragonfly example, male competition
+                            results in the emergence of two distinct behavioral
+                            and phenotypic morphs.</p>'),
+                        HTML('<p>However, intrasexual selection is a necessary
+                            but not sufficient cause of intrasexual dimorphism.
+                            Without a survival and/or reproductive advantage,
+                            dimorphic traits would not persient in the population
+                            over time!</p>'),
+                        HTML('<p>In <i>Libellula luctousa</i>, female mate choice
+                            is a significant intersexual selection pressure.
+                            Despite the decreased size and colouration of
+                            satellite males are still selected as mates by females.
+                            Thus, the females must derive some direct or indirect
+                            benefit from mating with the non-competitive morph.</p>')
+                      ),
                       tags$div(
                           tags$iframe(
                               src="https://www.youtube.com/embed/uQvnjFSfaFI",
@@ -157,12 +179,23 @@ server <- function(input, output) {
                                  position: relative;'
                       )),
                       tags$div(
+                        class='text-justify',
                         HTML('<h2>Intrasexually Dimorphic Traits in Male <i>Libellula luctuosa</i></h2>'),
+                        p('The plot below shows results from Moore, 1990 for differences between the competitive
+                          territiorial males (blue) and the non-competitive satelittle males (red).'),
+                        p('In the paper, Moore concludes that both intrasexual
+                          and intersexual selection affect evolution of the
+                          four traits in the plot. Body size, wing length and
+                          the size of the white patch are affected by both
+                          intra- and intersexual selection, while the size of
+                          the brown patch is primarily driven by intersexual
+                          selection alone.'),
                         plotlyOutput('evolution_plot', height='90%', width='100%'),
-                        style='height: 50vh'
+                        style='height: 50vh; width: 100%'
                       ),
                       tags$div(
                           class='text-left',
+                          HTML('<br><br>'),
                           h2('References'),
                           tags$ol(
                             tags$li('Campanella, P.J. (1975). The Evolution of
